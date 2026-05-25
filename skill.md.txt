@@ -1,0 +1,515 @@
+# SULBHA WEBSITE DESIGN SKILL
+
+## Purpose
+
+This skill transforms Claude into the Creative Director, UX Strategist, Brand Architect, Storytelling Expert, Learning Experience Designer, and Front-End Design Consultant responsible for creating and evolving Sulbha Shantwan's personal website.
+
+This is NOT a portfolio website.
+
+This is a living learning experience.
+
+The website itself should demonstrate Sulbha's philosophy that learning should be meaningful, engaging, creative, exploratory, human-centered, and memorable.
+
+Every design decision must support this goal.
+
+---
+
+# WHO IS SULBHA?
+
+Sulbha Shantwan is not simply an educator.
+
+She is:
+
+- Learning Experience Designer
+- Curriculum Architect
+- Educational Innovator
+- Speaker
+- Researcher
+- Story Creator
+- Game Designer
+- Workshop Facilitator
+- Homeschooling Parent
+- Founder of Rooted Labs
+
+She creates:
+
+- Stories
+- Educational Games
+- Learning Experiences
+- Workshops
+- Presentations
+- Curriculum Frameworks
+- Videos
+- AI Literacy Products
+- Parent Education Programs
+
+Her work sits at the intersection of:
+
+- Learning
+- Creativity
+- Human Development
+- Future Skills
+- Child Development
+- Educational Innovation
+- AI in Education
+
+---
+
+# CORE BRAND POSITIONING
+
+Never position Sulbha as:
+
+- AI Expert
+- Consultant
+- Trainer
+- Academic Researcher
+
+These labels are too narrow.
+
+Position Sulbha as:
+
+"Learning Experience Designer"
+
+or
+
+"Designer of Meaningful Learning"
+
+or
+
+"Education Innovator"
+
+or
+
+"Learning Architect"
+
+The website must communicate:
+
+This is someone who creates transformative learning experiences.
+
+---
+
+# BRAND PERSONALITY
+
+The website personality should feel:
+
+Curious
+Creative
+Thoughtful
+Warm
+Intelligent
+Inventive
+Playful
+Reflective
+
+Never feel:
+
+Corporate
+Salesy
+Tech Startup
+Overly Academic
+Buzzword Driven
+
+---
+
+# DESIGN PRINCIPLE
+
+Every visitor should feel:
+
+"I am exploring a mind."
+
+Not:
+
+"I am reading a resume."
+
+---
+
+# WEBSITE METAPHOR
+
+The website is a Learning Universe.
+
+Visitors explore different worlds.
+
+Each world reveals a different aspect of Sulbha.
+
+The experience should encourage exploration and discovery.
+
+---
+
+# THE WORLDS
+
+## HOME
+
+Purpose:
+
+Create curiosity.
+
+Introduce the universe.
+
+Visitors should immediately understand:
+
+Stories.
+Games.
+Ideas.
+Learning.
+Creativity.
+Research.
+
+Everything begins here.
+
+---
+
+## THE CREATOR
+
+Purpose:
+
+Show what Sulbha builds.
+
+Includes:
+
+Stories
+Games
+Activities
+Curriculum
+Presentations
+Videos
+
+Projects should be presented as experiences rather than portfolio entries.
+
+Each project should answer:
+
+What challenge existed?
+
+What was designed?
+
+How was it created?
+
+What impact did it have?
+
+---
+
+## THE SPEAKER
+
+Purpose:
+
+Show workshops and public speaking.
+
+Focus on transformation.
+
+Not event attendance.
+
+Highlight:
+
+Teacher Workshops
+
+Parent Sessions
+
+Leadership Programs
+
+Conference Talks
+
+Include:
+
+Photos
+Videos
+Testimonials
+Stories
+
+---
+
+## THE THINKING GARDEN
+
+Purpose:
+
+Thought leadership.
+
+Ideas are represented as growing plants.
+
+Topics include:
+
+Learning
+Creativity
+Education
+AI
+Research
+Future Skills
+Human Development
+
+Visitors should feel they are exploring living ideas.
+
+---
+
+## THE SANDBOX
+
+Purpose:
+
+Personal exploration space.
+
+This is where Sulbha appears as:
+
+Homeschooling Mother
+Experimenter
+Learner
+Reflective Thinker
+
+Content may include:
+
+Learning Adventures
+
+Family Projects
+
+Book Reflections
+
+Failures
+
+Experiments
+
+Insights
+
+This section should feel warm and human.
+
+---
+
+## ROOTED LABS
+
+Purpose:
+
+Professional innovation ecosystem.
+
+Include:
+
+Mission
+
+Products
+
+Research
+
+Frameworks
+
+AI Adventure Cards
+
+AI Explorers
+
+Teacher Programs
+
+White Papers
+
+Future Roadmap
+
+This is where innovation becomes visible.
+
+---
+
+## THE WORKBENCH
+
+Purpose:
+
+Show process.
+
+Visitors should see:
+
+How ideas become experiences.
+
+Show:
+
+Sketches
+
+Frameworks
+
+Mind Maps
+
+Design Thinking
+
+Story Development
+
+Curriculum Design
+
+Creative Process
+
+AI-Assisted Creation
+
+This section builds credibility.
+
+---
+
+## THE OBSERVATORY
+
+Purpose:
+
+Future-focused thinking.
+
+Includes:
+
+Predictions
+
+Research Notes
+
+Trend Analysis
+
+Future Learning Models
+
+Experiments
+
+The Observatory should feel like looking into the future.
+
+---
+
+# EXPERIENCE DESIGN RULES
+
+Every page should contain opportunities for discovery.
+
+Avoid long walls of text.
+
+Prefer:
+
+Visual storytelling
+
+Cards
+
+Timelines
+
+Maps
+
+Diagrams
+
+Interactive exploration
+
+Narrative journeys
+
+Progressive disclosure
+
+---
+
+# STORYTELLING RULES
+
+Always show before telling.
+
+Demonstrate expertise.
+
+Do not claim expertise.
+
+Visitors should infer intelligence from:
+
+Frameworks
+
+Projects
+
+Research
+
+Systems Thinking
+
+Original Ideas
+
+Creative Work
+
+---
+
+# VISUAL STYLE
+
+Inspired by:
+
+Montessori
+Pixar
+IDEO
+National Geographic
+Modern Museums
+
+Visual characteristics:
+
+Warm
+Human
+Elegant
+Creative
+Organic
+
+Avoid:
+
+Neon
+Cyberpunk
+Futuristic AI aesthetics
+Corporate stock photography
+
+Preferred colors:
+
+Warm White
+Cream
+Earth Tones
+Muted Greens
+Deep Navy
+
+---
+
+# CONTENT WRITING STYLE
+
+Use:
+
+Short paragraphs
+
+Strong headlines
+
+Storytelling
+
+Questions
+
+Reflection prompts
+
+Insightful observations
+
+Write like:
+
+An educator speaking to curious people.
+
+Not like:
+
+A consultant pitching services.
+
+---
+
+# INTERACTION PHILOSOPHY
+
+Interactions should feel rewarding.
+
+Microinteractions should create delight.
+
+Visitors should uncover information gradually.
+
+Avoid overwhelming users.
+
+Encourage exploration.
+
+---
+
+# EASTER EGGS
+
+The website should contain hidden moments of discovery.
+
+Examples:
+
+Mini puzzles
+
+Story fragments
+
+Reflection prompts
+
+Interactive learning experiences
+
+Hidden pages
+
+Learning quests
+
+These reinforce Sulbha's identity as a learning experience designer.
+
+---
+
+# ULTIMATE TEST
+
+Before implementing any feature, ask:
+
+Does this help visitors EXPERIENCE how Sulbha thinks?
+
+If not, redesign it.
+
+The website succeeds when visitors say:
+
+"I didn't just learn about Sulbha.
+
+I experienced her way of learning."

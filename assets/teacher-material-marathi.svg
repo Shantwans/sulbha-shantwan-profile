@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Marathi AI Teacher Guidance</title>
+  <desc id="desc">Cover artwork for Marathi AI teacher guidance material by Sulbha Shantwan.</desc>
+  <rect width="1080" height="1080" rx="36" fill="#fffdf8"/>
+  <g opacity=".16" fill="#d8cfc4" font-family="Arial, sans-serif" font-size="86" font-weight="700">
+    <text x="42" y="160">आ</text>
+    <text x="900" y="205">व</text>
+    <text x="128" y="350">श</text>
+    <text x="805" y="406">म</text>
+    <text x="70" y="812">ई</text>
+    <text x="920" y="838">क</text>
+  </g>
+  <text x="540" y="96" text-anchor="middle" fill="#111" font-family="Arial, sans-serif" font-size="46" font-weight="800">मराठी</text>
+  <text x="540" y="210" text-anchor="middle" fill="#11133f" font-family="Arial, sans-serif" font-size="70" font-weight="900">AI शिक्षक मार्गदर्शिका</text>
+  <text x="540" y="292" text-anchor="middle" fill="#111" font-family="Arial, sans-serif" font-size="42" font-weight="700">Sulbha Shantwan</text>
+  <rect x="140" y="410" width="310" height="210" rx="22" fill="#f6f5f1"/>
+  <rect x="168" y="438" width="254" height="12" rx="6" fill="#e6cf77"/>
+  <path d="M280 535c-32-36-78-30-102-16 48 34 80 46 102 16Z" fill="#90bd93"/>
+  <path d="M290 535c32-36 78-30 102-16-48 34-80 46-102 16Z" fill="#90bd93"/>
+  <path d="M286 535c-8 38-38 70-82 88" stroke="#6fa875" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M286 535c8 40 38 70 84 88" stroke="#6fa875" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <circle cx="247" cy="492" r="10" fill="#99b8eb"/>
+  <circle cx="330" cy="486" r="10" fill="#99b8eb"/>
+  <rect x="170" y="690" width="270" height="130" rx="20" fill="#f6f5f1"/>
+  <path d="M200 755c54-82 102 82 156 0" stroke="#d36a42" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M200 755c54 82 102-82 156 0" stroke="#e3bd4f" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <rect x="596" y="340" width="270" height="112" rx="44" fill="#f0ce66"/>
+  <rect x="642" y="378" width="176" height="10" rx="5" fill="#fff9df"/>
+  <rect x="642" y="410" width="148" height="10" rx="5" fill="#fff9df"/>
+  <path d="M610 498c65-44 148-24 166 58 36 18 52 58 42 100-12 52-68 86-126 78-55-8-98-46-112-96-16-58-3-108 30-140Z" fill="#ffd4bd"/>
+  <path d="M610 498c72-58 156-10 166 58-68 18-128-4-166-58Z" fill="#111"/>
+  <circle cx="650" cy="612" r="9" fill="#111"/>
+  <circle cx="736" cy="612" r="9" fill="#111"/>
+  <path d="M665 670c34 18 68 16 100-8" stroke="#111" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M548 628c-42 52-70 128-82 230" stroke="#ffd4bd" stroke-width="52" fill="none" stroke-linecap="round"/>
+  <path d="M794 714c36 40 76 58 120 54" stroke="#ffd4bd" stroke-width="52" fill="none" stroke-linecap="round"/>
+  <rect x="485" y="716" width="252" height="236" rx="30" fill="#9ab4f0"/>
+  <path d="M462 492l-10 420" stroke="#111" stroke-width="10" stroke-linecap="round"/>
+  <rect x="560" y="912" width="338" height="76" rx="20" fill="#f0ce66"/>
+  <rect x="610" y="850" width="330" height="76" rx="20" fill="#f6d989"/>
+  <rect x="140" y="846" width="85" height="120" rx="26" fill="#93a8f3"/>
+  <path d="M128 846c32-36 88-28 112 0" fill="#9ccf9e"/>
+</svg>

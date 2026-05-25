@@ -1,0 +1,722 @@
+# SULBHA WEBSITE CONTENT STRATEGY
+
+## PURPOSE
+
+This document serves as the content blueprint for Sulbha Shantwan's personal website.
+
+The website is not a portfolio.
+
+It is a digital ecosystem that showcases:
+
+- Learning Design
+- Educational Innovation
+- Thought Leadership
+- Storytelling
+- Creativity
+- Research
+- Entrepreneurship
+- Personal Exploration
+
+The goal is to create a website visitors return to repeatedly.
+
+---
+
+# WEBSITE GOALS
+
+The website should:
+
+1. Establish credibility
+2. Demonstrate expertise
+3. Showcase creativity
+4. Highlight innovation
+5. Attract collaborations
+6. Generate speaking opportunities
+7. Support Rooted Labs
+8. Build a community
+9. Archive ideas and projects
+10. Create intellectual legacy
+
+---
+
+# TARGET AUDIENCES
+
+## Schools
+
+Looking for:
+
+- Academic Leadership
+- Curriculum Design
+- School Transformation
+- Teacher Training
+
+---
+
+## Teachers
+
+Looking for:
+
+- Learning Ideas
+- Classroom Activities
+- Professional Development
+
+---
+
+## Parents
+
+Looking for:
+
+- Parenting Insights
+- Homeschooling Inspiration
+- Future Readiness
+
+---
+
+## Researchers
+
+Looking for:
+
+- Frameworks
+- Educational Innovation
+- Future Learning Models
+
+---
+
+## Organizations
+
+Looking for:
+
+- Consultants
+- Speakers
+- Collaborators
+- Content Creators
+
+---
+
+# HOMEPAGE
+
+## Primary Message
+
+Designing Learning Experiences People Remember
+
+---
+
+## Secondary Message
+
+Stories.
+Games.
+Curriculum.
+Workshops.
+Ideas.
+Experiments.
+
+Welcome to my learning universe.
+
+---
+
+## Homepage Components
+
+Hero Section
+
+Learning Universe Navigation
+
+Featured Projects
+
+Latest Ideas
+
+Sandbox Reflections
+
+Rooted Labs Highlights
+
+Speaking Highlights
+
+Newsletter Signup
+
+Contact CTA
+
+---
+
+# ABOUT PAGE
+
+## Core Narrative
+
+Not a biography.
+
+A journey.
+
+---
+
+## Sections
+
+My Story
+
+What I Believe About Learning
+
+Milestones
+
+Key Experiences
+
+Current Work
+
+Future Vision
+
+---
+
+# THE CREATOR
+
+Purpose:
+
+Showcase work.
+
+---
+
+## Stories
+
+Content Types:
+
+AI Adventure Cards
+
+Story-Based Learning Modules
+
+Character Universes
+
+Learning Narratives
+
+Future Story Projects
+
+---
+
+## Games
+
+Content Types:
+
+Classroom Games
+
+Learning Challenges
+
+Simulations
+
+Card Games
+
+Problem Solving Activities
+
+Interactive Experiences
+
+---
+
+## Presentations
+
+Content Types:
+
+Parent Talks
+
+Teacher Workshops
+
+Conference Sessions
+
+Keynotes
+
+Training Programs
+
+---
+
+## Videos
+
+Content Types:
+
+Workshop Clips
+
+Explainer Videos
+
+Training Videos
+
+Interviews
+
+Project Showcases
+
+---
+
+## Curriculum Design
+
+Content Types:
+
+AI Literacy Curriculum
+
+21st Century Skills Curriculum
+
+Awareness Curriculum
+
+Cross-Curricular Frameworks
+
+Teacher Resources
+
+---
+
+# THE SPEAKER
+
+## Workshop Categories
+
+For Parents
+
+For Teachers
+
+For School Leaders
+
+For Students
+
+---
+
+## Featured Topics
+
+Raising Humans in an AI World
+
+AI as a Teacher's Assistant
+
+Future Ready Learners
+
+Teaching in the Age of AI
+
+Creativity and Learning
+
+Learning Beyond School
+
+The Future of Education
+
+---
+
+## Assets
+
+Photos
+
+Testimonials
+
+Videos
+
+Impact Stories
+
+Workshop Summaries
+
+---
+
+# THE THINKING GARDEN
+
+Purpose:
+
+Thought Leadership
+
+---
+
+## Categories
+
+Learning
+
+Creativity
+
+Future Skills
+
+AI
+
+Research
+
+Education
+
+Human Development
+
+Leadership
+
+Innovation
+
+---
+
+## Article Formats
+
+Essays
+
+Opinion Pieces
+
+Research Notes
+
+Frameworks
+
+Visual Models
+
+Reflection Pieces
+
+---
+
+## Initial Articles
+
+Why Learning Begins With Curiosity
+
+What AI Cannot Replace
+
+The Hidden Cost of Convenience
+
+The Future of Homework
+
+Beyond Personalization
+
+Learning Through Stories
+
+The Human Side of Future Skills
+
+---
+
+# SANDBOX
+
+Purpose:
+
+Personal Exploration
+
+---
+
+## Tagline
+
+Experiments in Learning, Parenting and Living
+
+---
+
+## Categories
+
+Homeschooling
+
+Books
+
+Family Projects
+
+Travel Learning
+
+Life Lessons
+
+Experiments
+
+Reflections
+
+Failures
+
+Discoveries
+
+---
+
+## Initial Posts
+
+Why We Chose Homeschooling
+
+A Year of Learning Without Textbooks
+
+What My Son Taught Me About Learning
+
+The Most Powerful Question a Child Can Ask
+
+Books That Changed How I Teach
+
+Learning in Unexpected Places
+
+---
+
+# ROOTED LABS
+
+Purpose:
+
+Professional Innovation Hub
+
+---
+
+## Mission
+
+Preparing children, educators and families for an AI-powered future.
+
+---
+
+## Products
+
+AI Adventure Cards
+
+AI Explorers
+
+Teacher Training Programs
+
+AI Literacy Frameworks
+
+White Papers
+
+Digital Literacy Resources
+
+Future Products
+
+---
+
+## Research
+
+Current Research Projects
+
+Future Research Ideas
+
+Research Findings
+
+White Papers
+
+Framework Development
+
+---
+
+## Resources
+
+Downloads
+
+Guides
+
+Toolkits
+
+Templates
+
+Reports
+
+---
+
+# THE WORKBENCH
+
+Purpose:
+
+Reveal creative process
+
+---
+
+## Sections
+
+How Ideas Begin
+
+Story Design Process
+
+Game Design Process
+
+Curriculum Design Process
+
+Workshop Design Process
+
+AI Workflow
+
+Tools I Use
+
+---
+
+## Possible Visuals
+
+Mind Maps
+
+Sketches
+
+Flowcharts
+
+Templates
+
+Design Boards
+
+Notebooks
+
+---
+
+# THE OBSERVATORY
+
+Purpose:
+
+Future Thinking
+
+---
+
+## Categories
+
+Education 2030
+
+Education 2040
+
+Emerging Technologies
+
+AI Futures
+
+Future Skills
+
+Learning Trends
+
+Research Watch
+
+---
+
+## Content Types
+
+Predictions
+
+Trend Analysis
+
+Scenario Planning
+
+Future Models
+
+Research Notes
+
+Experiments
+
+---
+
+# SOCIAL PROOF
+
+## Testimonials
+
+Teachers
+
+Parents
+
+School Leaders
+
+Students
+
+Partners
+
+---
+
+## Metrics
+
+Teachers Trained
+
+Students Reached
+
+Schools Supported
+
+Workshops Conducted
+
+Frameworks Created
+
+Curricula Designed
+
+---
+
+# RESOURCE LIBRARY
+
+Purpose:
+
+Lead Generation
+
+---
+
+## Downloads
+
+White Papers
+
+Frameworks
+
+Templates
+
+Guides
+
+Checklists
+
+Toolkits
+
+Activity Packs
+
+---
+
+# MEDIA PAGE
+
+Include:
+
+Articles
+
+Podcasts
+
+Interviews
+
+Publications
+
+Book Chapters
+
+Research Papers
+
+News Features
+
+---
+
+# NEWSLETTER
+
+Purpose:
+
+Build Community
+
+---
+
+## Suggested Name
+
+The Learning Dispatch
+
+or
+
+Notes From The Sandbox
+
+or
+
+The Learning Observatory
+
+---
+
+# CONTACT PAGE
+
+Include:
+
+Speaking Requests
+
+Collaborations
+
+Consulting
+
+Media Enquiries
+
+Partnerships
+
+General Contact
+
+---
+
+# CONTENT CREATION PRIORITY
+
+PHASE 1
+
+Homepage
+
+About
+
+Creator
+
+Rooted
+
+Contact
+
+---
+
+PHASE 2
+
+Thinking Garden
+
+Sandbox
+
+Speaker
+
+---
+
+PHASE 3
+
+Workbench
+
+Observatory
+
+Media
+
+Resource Library
+
+---
+
+# WEBSITE SUCCESS METRIC
+
+The website succeeds if visitors conclude:
+
+Sulbha is not simply an educator.
+
+She is a designer of learning experiences, a builder of ideas, and a thoughtful voice shaping the future of learning.
