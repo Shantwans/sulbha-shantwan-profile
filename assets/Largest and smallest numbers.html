@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Number Builder Game</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1b2d;
+    --panel: #1a2d47;
+    --accent1: #ff6b6b;
+    --accent2: #ffd93d;
+    --accent3: #6bcb77;
+    --accent4: #4d96ff;
+    --accent5: #c77dff;
+    --text: #f0f4ff;
+    --muted: #7a90b0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-image: 
+      radial-gradient(circle at 20% 20%, rgba(77,150,255,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(199,125,255,0.08) 0%, transparent 50%);
+  }
+
+  header {
+    text-align: center;
+    padding: 28px 20px 10px;
+  }
+
+  header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    background: linear-gradient(135deg, var(--accent2), var(--accent1));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 1px;
+  }
+
+  header p {
+    color: var(--muted);
+    font-size: 1rem;
+    margin-top: 4px;
+    font-weight: 600;
+  }
+
+  /* Controls */
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 20px;
+  }
+
+  .controls label {
+    font-weight: 700;
+    color: var(--accent2);
+    font-size: 0.95rem;
+  }
+
+  #digitInput {
+    background: var(--panel);
+    border: 2px solid var(--accent4);
+    border-radius: 12px;
+    color: var(--text);
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    padding: 8px 14px;
+    width: 200px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  #digitInput:focus { border-color: var(--accent2); }
+
+  .btn {
+    padding: 10px 22px;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+  .btn:active { transform: translateY(0); }
+  .btn-primary { background: linear-gradient(135deg, var(--accent4), var(--accent5)); color: #fff; }
+  .btn-secondary { background: var(--panel); color: var(--accent2); border: 2px solid var(--accent2); }
+
+  /* Challenge area */
+  .challenge-box {
+    margin: 0 auto 16px;
+    max-width: 700px;
+    background: var(--panel);
+    border-radius: 20px;
+    padding: 20px 24px;
+    border: 2px solid rgba(255,255,255,0.07);
+    text-align: center;
+  }
+
+  .challenge-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    color: var(--accent2);
+    margin-bottom: 6px;
+  }
+
+  .challenge-desc {
+    font-size: 1rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  /* Answer slots */
+  .answer-area {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    min-height: 80px;
+    align-items: center;
+  }
+
+  .slot {
+    width: 68px;
+    height: 74px;
+    border-radius: 14px;
+    border: 3px dashed rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative;
+  }
+
+  .slot.drag-over {
+    border-color: var(--accent2);
+    background: rgba(255,217,61,0.12);
+  }
+
+  .slot .placed-digit {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    cursor: grab;
+    font-family: 'Fredoka One', cursive;
+    font-size: 2rem;
+  }
+
+  /* Available digits */
+  .digits-pool {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 16px 20px 10px;
+  }
+
+  .digit-chip {
+    width: 68px;
+    height: 74px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: 2rem;
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
+    position: relative;
+    border: none;
+  }
+  .digit-chip:hover { transform: translateY(-4px) rotate(-3deg); box-shadow: 0 10px 28px rgba(0,0,0,0.4); }
+  .digit-chip.dragging { opacity: 0.4; transform: scale(0.9); }
+  .digit-chip.used { opacity: 0.2; pointer-events: none; }
+
+  /* Result area */
+  .result-area {
+    text-align: center;
+    min-height: 60px;
+    padding: 10px;
+  }
+
+  .check-area {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .feedback {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .feedback.correct { color: var(--accent3); }
+  .feedback.wrong { color: var(--accent1); }
+
+  /* Score */
+  .score-bar {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 10px 20px;
+    font-weight: 800;
+    font-size: 1rem;
+  }
+  .score-bar span { color: var(--muted); }
+  .score-bar b { color: var(--accent3); font-family: 'Fredoka One', cursive; font-size: 1.3rem; }
+
+  /* Challenge nav */
+  .challenge-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 20px 20px;
+    flex-wrap: wrap;
+  }
+
+  .ch-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--panel);
+    border: 2px solid var(--muted);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .ch-dot.active { background: var(--accent4); border-color: var(--accent4); }
+  .ch-dot.done { background: var(--accent3); border-color: var(--accent3); }
+
+  /* Confetti canvas */
+  #confettiCanvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  .digit-colors {
+    --c0: #ff6b6b;
+    --c1: #ffd93d;
+    --c2: #6bcb77;
+    --c3: #4d96ff;
+    --c4: #c77dff;
+    --c5: #ff9f43;
+    --c6: #48dbfb;
+    --c7: #ff6b9d;
+    --c8: #a3cb38;
+    --c9: #fd79a8;
+  }
+
+  .pool-label {
+    text-align: center;
+    font-weight: 800;
+    color: var(--muted);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 0;
+  }
+
+  .slot-label {
+    position: absolute;
+    bottom: -20px;
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-weight: 700;
+  }
+
+  @keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+  }
+  .pop { animation: pop 0.3s ease; }
+
+  .digits-section {
+    max-width: 700px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.03);
+    border-radius: 20px;
+    padding: 14px;
+    border: 2px dashed rgba(255,255,255,0.07);
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confettiCanvas"></canvas>
+
+<header>
+  <h1>🔢 Number Builder!</h1>
+  <p>Drag the digits to build the number!</p>
+</header>
+
+<div class="score-bar">
+  <div><span>Score: </span><b id="score">0</b></div>
+  <div><span>Streak: </span><b id="streak">🔥 0</b></div>
+</div>
+
+<div class="controls">
+  <label>Your digits:</label>
+  <input id="digitInput" type="text" value="5, 1, 7, 0, 3, 8" placeholder="e.g. 5, 1, 7, 0, 3, 8" />
+  <button class="btn btn-primary" onclick="startGame()">▶ Start Game</button>
+</div>
+
+<div id="challengeNav" class="challenge-nav"></div>
+
+<div class="challenge-box" id="challengeBox" style="display:none">
+  <div class="challenge-title" id="challengeTitle"></div>
+  <div class="challenge-desc" id="challengeDesc"></div>
+  <div class="answer-area" id="answerArea"></div>
+  <div class="check-area">
+    <button class="btn btn-secondary" onclick="clearAnswer()">🗑 Clear</button>
+    <button class="btn btn-primary" onclick="checkAnswer()">✅ Check!</button>
+  </div>
+  <div class="result-area">
+    <div class="feedback" id="feedback"></div>
+  </div>
+</div>
+
+<div id="poolSection" style="display:none; max-width:700px; margin:0 auto 30px;">
+  <p class="pool-label">— Available Digits —</p>
+  <div class="digits-section">
+    <div class="digits-pool" id="digitsPool"></div>
+  </div>
+</div>
+
+<script>
+const CHIP_COLORS = ['#ff6b6b','#ffd93d','#6bcb77','#4d96ff','#c77dff','#ff9f43','#48dbfb','#ff6b9d','#a3cb38','#fd79a8'];
+
+let digits = [];
+let challenges = [];
+let currentChallenge = 0;
+let score = 0;
+let streak = 0;
+let challengeDone = [];
+let draggingFrom = null; // {type: 'pool'|'slot', index}
+let placedDigits = []; // array of {digit, colorIndex} or null per slot
+
+function parseDigits(str) {
+  return str.split(/[\s,]+/).filter(s => /^\d$/.test(s)).map(Number);
+}
+
+function buildChallenges(digits) {
+  const len = digits.length;
+  const chs = [];
+
+  // Always include these
+  chs.push({ title: `Largest ${len}-Digit Number`, desc: `Use ALL ${len} digits to make the BIGGEST number!`, slots: len, type: 'all', target: 'largest' });
+  chs.push({ title: `Smallest ${len}-Digit Number`, desc: `Use ALL ${len} digits to make the SMALLEST number (no leading zero)!`, slots: len, type: 'all', target: 'smallest' });
+  if (len >= 2) {
+    chs.push({ title: 'Largest 2-Digit Number', desc: 'Pick ANY 2 digits to make the BIGGEST 2-digit number!', slots: 2, type: 'pick', target: 'largest' });
+    chs.push({ title: 'Smallest 2-Digit Number', desc: 'Pick ANY 2 digits to make the SMALLEST 2-digit number (no leading zero)!', slots: 2, type: 'pick', target: 'smallest' });
+  }
+  if (len >= 3) {
+    chs.push({ title: 'Largest 3-Digit Number', desc: 'Pick ANY 3 digits to make the BIGGEST 3-digit number!', slots: 3, type: 'pick', target: 'largest' });
+    chs.push({ title: 'Smallest 3-Digit Number', desc: 'Pick ANY 3 digits to make the SMALLEST 3-digit number (no leading zero)!', slots: 3, type: 'pick', target: 'smallest' });
+  }
+  if (len >= 4) {
+    chs.push({ title: 'Largest 4-Digit Number', desc: 'Pick ANY 4 digits to make the BIGGEST 4-digit number!', slots: 4, type: 'pick', target: 'largest' });
+    chs.push({ title: 'Smallest 4-Digit Number', desc: 'Pick ANY 4 digits to make the SMALLEST 4-digit number (no leading zero)!', slots: 4, type: 'pick', target: 'smallest' });
+  }
+
+  return chs;
+}
+
+function computeTarget(challenge, digits) {
+  const { slots, type, target } = challenge;
+  const sorted = [...digits].sort((a, b) => a - b);
+  const sortedDesc = [...digits].sort((a, b) => b - a);
+
+  if (type === 'all') {
+    if (target === 'largest') return sortedDesc.join('');
+    else {
+      // smallest without leading zero
+      const arr = [...sorted];
+      if (arr[0] === 0) {
+        const firstNonZero = arr.findIndex(d => d !== 0);
+        if (firstNonZero > 0) { [arr[0], arr[firstNonZero]] = [arr[firstNonZero], arr[0]]; }
+      }
+      return arr.join('');
+    }
+  } else {
+    // pick best `slots` digits
+    if (target === 'largest') {
+      return sortedDesc.slice(0, slots).join('');
+    } else {
+      // smallest pick: no leading zero
+      const arr = [...sorted];
+      // try all permutations of top `slots` candidates
+      // just use greedy: pick smallest for each position
+      const pool = [...sorted];
+      let result = '';
+      let usedIndices = new Set();
+      for (let pos = 0; pos < slots; pos++) {
+        for (let i = 0; i < pool.length; i++) {
+          if (usedIndices.has(i)) continue;
+          if (pos === 0 && pool[i] === 0) continue; // no leading zero
+          usedIndices.add(i);
+          result += pool[i];
+          break;
+        }
+        if (result.length === pos) {
+          // stuck: need zero as first char but all others are zero - rare edge
+          for (let i = 0; i < pool.length; i++) {
+            if (!usedIndices.has(i)) { usedIndices.add(i); result += pool[i]; break; }
+          }
+        }
+      }
+      return result;
+    }
+  }
+}
+
+function startGame() {
+  const raw = document.getElementById('digitInput').value;
+  digits = parseDigits(raw);
+  if (digits.length < 2) { alert('Please enter at least 2 digits!'); return; }
+  challenges = buildChallenges(digits);
+  challengeDone = challenges.map(() => false);
+  currentChallenge = 0;
+  score = 0; streak = 0;
+  updateScoreUI();
+  buildNav();
+  document.getElementById('challengeBox').style.display = '';
+  document.getElementById('poolSection').style.display = '';
+  loadChallenge(0);
+}
+
+function buildNav() {
+  const nav = document.getElementById('challengeNav');
+  nav.innerHTML = '';
+  challenges.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'ch-dot' + (i === 0 ? ' active' : '');
+    dot.id = `dot${i}`;
+    dot.title = challenges[i].title;
+    dot.onclick = () => { currentChallenge = i; loadChallenge(i); };
+    nav.appendChild(dot);
+  });
+}
+
+function updateNav() {
+  challenges.forEach((_, i) => {
+    const dot = document.getElementById(`dot${i}`);
+    if (!dot) return;
+    dot.className = 'ch-dot' + (i === currentChallenge ? ' active' : '') + (challengeDone[i] ? ' done' : '');
+  });
+}
+
+function loadChallenge(idx) {
+  currentChallenge = idx;
+  const ch = challenges[idx];
+  placedDigits = new Array(ch.slots).fill(null);
+  document.getElementById('challengeTitle').textContent = ch.title;
+  document.getElementById('challengeDesc').textContent = ch.desc;
+  document.getElementById('feedback').textContent = '';
+  document.getElementById('feedback').className = 'feedback';
+  renderSlots();
+  renderPool();
+  updateNav();
+}
+
+function renderSlots() {
+  const ch = challenges[currentChallenge];
+  const area = document.getElementById('answerArea');
+  area.innerHTML = '';
+  for (let i = 0; i < ch.slots; i++) {
+    const slot = document.createElement('div');
+    slot.className = 'slot';
+    slot.dataset.slotIndex = i;
+
+    if (placedDigits[i] !== null) {
+      const pd = placedDigits[i];
+      const chip = document.createElement('div');
+      chip.className = 'placed-digit';
+      chip.textContent = pd.digit;
+      chip.style.background = CHIP_COLORS[pd.colorIndex % CHIP_COLORS.length];
+      chip.style.color = '#fff';
+      chip.style.textShadow = '0 2px 4px rgba(0,0,0,0.3)';
+      chip.style.boxShadow = `0 4px 14px ${CHIP_COLORS[pd.colorIndex % CHIP_COLORS.length]}66`;
+      chip.draggable = true;
+      chip.addEventListener('dragstart', e => {
+        draggingFrom = { type: 'slot', index: i };
+        e.dataTransfer.effectAllowed = 'move';
+        setTimeout(() => chip.style.opacity = '0.3', 0);
+      });
+      chip.addEventListener('dragend', () => { chip.style.opacity = ''; });
+      slot.appendChild(chip);
+    }
+
+    slot.addEventListener('dragover', e => { e.preventDefault(); slot.classList.add('drag-over'); });
+    slot.addEventListener('dragleave', () => slot.classList.remove('drag-over'));
+    slot.addEventListener('drop', e => {
+      e.preventDefault();
+      slot.classList.remove('drag-over');
+      handleDrop(parseInt(slot.dataset.slotIndex));
+    });
+
+    // Touch support
+    slot.addEventListener('touchend', e => {
+      e.preventDefault();
+      handleTouchDrop(parseInt(slot.dataset.slotIndex));
+    });
+
+    area.appendChild(slot);
+  }
+}
+
+function renderPool() {
+  const pool = document.getElementById('digitsPool');
+  pool.innerHTML = '';
+  // track which digit indices are used in slots
+  const usedSourceIndices = new Set();
+  placedDigits.forEach(pd => { if (pd !== null) usedSourceIndices.add(pd.sourceIndex); });
+
+  digits.forEach((d, i) => {
+    const chip = document.createElement('div');
+    chip.className = 'digit-chip' + (usedSourceIndices.has(i) ? ' used' : '');
+    chip.textContent = d;
+    chip.dataset.poolIndex = i;
+    const color = CHIP_COLORS[i % CHIP_COLORS.length];
+    chip.style.background = color;
+    chip.style.color = '#fff';
+    chip.style.textShadow = '0 2px 6px rgba(0,0,0,0.3)';
+    chip.style.boxShadow = `0 4px 16px ${color}55`;
+    chip.draggable = true;
+
+    chip.addEventListener('dragstart', e => {
+      if (usedSourceIndices.has(i)) { e.preventDefault(); return; }
+      draggingFrom = { type: 'pool', index: i, digit: d, colorIndex: i };
+      e.dataTransfer.effectAllowed = 'move';
+      setTimeout(() => chip.classList.add('dragging'), 0);
+    });
+    chip.addEventListener('dragend', () => chip.classList.remove('dragging'));
+
+    // Touch support
+    let touchStarted = false;
+    chip.addEventListener('touchstart', e => {
+      if (usedSourceIndices.has(i)) return;
+      touchStarted = true;
+      draggingFrom = { type: 'pool', index: i, digit: d, colorIndex: i };
+    }, { passive: true });
+
+    pool.appendChild(chip);
+  });
+}
+
+function handleDrop(slotIndex) {
+  if (!draggingFrom) return;
+
+  if (draggingFrom.type === 'pool') {
+    const di = draggingFrom.index;
+    // Check not already used
+    const usedSourceIndices = new Set(placedDigits.filter(p => p !== null).map(p => p.sourceIndex));
+    if (usedSourceIndices.has(di)) return;
+    // If slot already has something, return it to pool
+    placedDigits[slotIndex] = { digit: digits[di], colorIndex: di, sourceIndex: di };
+  } else if (draggingFrom.type === 'slot') {
+    const fromSlot = draggingFrom.index;
+    if (fromSlot === slotIndex) return;
+    // Swap
+    const tmp = placedDigits[slotIndex];
+    placedDigits[slotIndex] = placedDigits[fromSlot];
+    placedDigits[fromSlot] = tmp;
+  }
+
+  draggingFrom = null;
+  document.getElementById('feedback').textContent = '';
+  renderSlots();
+  renderPool();
+}
+
+function handleTouchDrop(slotIndex) {
+  if (!draggingFrom) return;
+  handleDrop(slotIndex);
+}
+
+function clearAnswer() {
+  placedDigits = new Array(challenges[currentChallenge].slots).fill(null);
+  document.getElementById('feedback').textContent = '';
+  document.getElementById('feedback').className = 'feedback';
+  renderSlots();
+  renderPool();
+}
+
+function checkAnswer() {
+  const ch = challenges[currentChallenge];
+  const filled = placedDigits.filter(p => p !== null);
+  if (filled.length < ch.slots) {
+    document.getElementById('feedback').textContent = '⚠️ Fill all the slots first!';
+    document.getElementById('feedback').className = 'feedback wrong';
+    return;
+  }
+
+  const playerAnswer = placedDigits.map(p => p.digit).join('');
+  const correctAnswer = computeTarget(ch, digits);
+
+  const fb = document.getElementById('feedback');
+  if (playerAnswer === correctAnswer) {
+    fb.textContent = `🎉 Amazing! ${playerAnswer} is correct!`;
+    fb.className = 'feedback correct';
+    if (!challengeDone[currentChallenge]) {
+      score += 10;
+      streak++;
+      challengeDone[currentChallenge] = true;
+    }
+    updateScoreUI();
+    updateNav();
+    launchConfetti();
+    // Auto next after delay
+    setTimeout(() => {
+      const next = challenges.findIndex((_, i) => !challengeDone[i]);
+      if (next !== -1) loadChallenge(next);
+    }, 1800);
+  } else {
+    streak = 0;
+    updateScoreUI();
+    fb.textContent = `❌ Not quite! Your number: ${playerAnswer}. Try again!`;
+    fb.className = 'feedback wrong';
+    // Shake animation on slots
+    document.querySelectorAll('.slot').forEach(s => {
+      s.style.animation = 'none';
+      setTimeout(() => s.style.animation = '', 10);
+    });
+  }
+}
+
+function updateScoreUI() {
+  document.getElementById('score').textContent = score;
+  document.getElementById('streak').textContent = `🔥 ${streak}`;
+}
+
+// Confetti
+const canvas = document.getElementById('confettiCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function launchConfetti() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  for (let i = 0; i < 80; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: -10,
+      r: Math.random() * 8 + 4,
+      color: CHIP_COLORS[Math.floor(Math.random() * CHIP_COLORS.length)],
+      vx: (Math.random() - 0.5) * 4,
+      vy: Math.random() * 4 + 2,
+      rot: Math.random() * 360,
+      rspeed: (Math.random() - 0.5) * 6,
+      shape: Math.random() > 0.5 ? 'circle' : 'rect'
+    });
+  }
+  requestAnimationFrame(animateConfetti);
+}
+
+function animateConfetti() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles = particles.filter(p => p.y < canvas.height + 20);
+  particles.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.rot += p.rspeed;
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot * Math.PI / 180);
+    ctx.fillStyle = p.color;
+    if (p.shape === 'circle') {
+      ctx.beginPath();
+      ctx.arc(0, 0, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      ctx.fillRect(-p.r, -p.r / 2, p.r * 2, p.r);
+    }
+    ctx.restore();
+  });
+  if (particles.length > 0) requestAnimationFrame(animateConfetti);
+}
+
+// Also handle dropping back to pool area
+document.getElementById('digitsPool')?.addEventListener('dragover', e => e.preventDefault());
+document.addEventListener('dragover', e => e.preventDefault());
+
+// Drop on pool area to return chip
+document.addEventListener('drop', e => {
+  // If drop not handled by a slot, return to pool
+  if (draggingFrom && draggingFrom.type === 'slot') {
+    placedDigits[draggingFrom.index] = null;
+    draggingFrom = null;
+    renderSlots();
+    renderPool();
+  }
+});
+
+// Start automatically
+startGame();
+</script>
+</body>
+</html>

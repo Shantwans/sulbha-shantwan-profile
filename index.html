@@ -167,6 +167,38 @@
         </div>
       </section>
 
+      <section id="games" class="section-block">
+        <div class="section-heading">
+          <p class="eyebrow">Playful learning</p>
+          <h2>Interactive games that explain concepts</h2>
+          <p>I design small, playable games that help learners explore ideas — play directly below or open the game in a new tab.</p>
+        </div>
+        <div class="games-grid">
+          <article class="game-card">
+            <h3>Math Beats</h3>
+            <p>A short, playable game that introduces number sense and patterns.</p>
+            <div class="game-embed">
+              <iframe src="assets/Math%20beats%20V1.html" title="Math Beats" width="100%" height="480" style="border:1px solid #ddd; border-radius:4px;"></iframe>
+            </div>
+            <div class="game-actions">
+              <button class="button primary play-game" data-src="assets/Math%20beats%20V1.html">Play</button>
+              <a class="button primary" href="assets/Math%20beats%20V1.html" target="_blank" rel="noopener">Open in new tab</a>
+            </div>
+          </article>
+          <article class="game-card">
+            <h3>Largest &amp; Smallest Numbers</h3>
+            <p>A playable activity that helps learners compare and reason about large numbers.</p>
+            <div class="game-embed">
+              <iframe src="assets/Largest%20and%20smallest%20numbers.html" title="Largest and Smallest Numbers" width="100%" height="480" style="border:1px solid #ddd; border-radius:4px;"></iframe>
+            </div>
+            <div class="game-actions">
+              <button class="button primary play-game" data-src="assets/Largest%20and%20smallest%20numbers.html">Play</button>
+              <a class="button primary" href="assets/Largest%20and%20smallest%20numbers.html" target="_blank" rel="noopener">Open in new tab</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section id="worlds" class="split-section">
         <div>
           <p class="eyebrow">My worlds</p>
@@ -244,5 +276,12 @@
     </footer>
 
     <script src="script.js"></script>
+    <div id="game-modal" class="game-modal" hidden>
+      <div class="game-modal-backdrop" data-close></div>
+      <div class="game-modal-panel" role="dialog" aria-modal="true">
+        <button class="game-modal-close" aria-label="Close game">×</button>
+        <iframe id="game-modal-iframe" src="" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
   </body>
 </html>
