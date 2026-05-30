@@ -181,6 +181,7 @@
               <iframe src="assets/Math%20beats%20V1.html" title="Math Beats" width="100%" height="480" style="border:1px solid #ddd; border-radius:4px;"></iframe>
             </div>
             <div class="game-actions">
+              <button class="button primary play-game" data-src="assets/Math%20beats%20V1.html">Play</button>
               <a class="button primary" href="assets/Math%20beats%20V1.html" target="_blank" rel="noopener">Open in new tab</a>
             </div>
           </article>
@@ -191,6 +192,7 @@
               <iframe src="assets/Largest%20and%20smallest%20numbers.html" title="Largest and Smallest Numbers" width="100%" height="480" style="border:1px solid #ddd; border-radius:4px;"></iframe>
             </div>
             <div class="game-actions">
+              <button class="button primary play-game" data-src="assets/Largest%20and%20smallest%20numbers.html">Play</button>
               <a class="button primary" href="assets/Largest%20and%20smallest%20numbers.html" target="_blank" rel="noopener">Open in new tab</a>
             </div>
           </article>
@@ -274,5 +276,12 @@
     </footer>
 
     <script src="script.js"></script>
+    <div id="game-modal" class="game-modal" hidden>
+      <div class="game-modal-backdrop" data-close></div>
+      <div class="game-modal-panel" role="dialog" aria-modal="true">
+        <button class="game-modal-close" aria-label="Close game">×</button>
+        <iframe id="game-modal-iframe" src="" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
   </body>
 </html>

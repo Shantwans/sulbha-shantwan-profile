@@ -111,3 +111,35 @@ if (gallery && dotsWrap && slides.length) {
   showGallerySlide(0);
   startGallery();
 }
+
+/* Game modal open/close */
+const gameModal = document.getElementById('game-modal');
+const gameModalIframe = document.getElementById('game-modal-iframe');
+const gameModalClose = document.querySelector('.game-modal-close');
+
+function openGameModal(src) {
+  if (!gameModal) return;
+  gameModal.removeAttribute('hidden');
+  gameModalIframe.src = src;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGameModal() {
+  if (!gameModal) return;
+  gameModal.setAttribute('hidden', '');
+  gameModalIframe.src = '';
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.play-game').forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    const src = btn.getAttribute('data-src');
+    if (src) openGameModal(src);
+  });
+});
+
+gameModalClose?.addEventListener('click', closeGameModal);
+document.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', closeGameModal));
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeGameModal();
+});
