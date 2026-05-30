@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Math Beats — Create Patterns & Play</title>
+  <style>
+    :root{--bg:#0f172a;--card:#0b1220;--accent:#ffb86b;--muted:#94a3b8;--error:#f87171;}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial; background:linear-gradient(180deg,#071029 0%, #071423 100%); color:#e6eef8; margin:0; padding:22px; padding-top: 80px;}
+    .wrap{max-width:1100px;margin:0 auto}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px; flex-wrap: wrap;}
+    h1{font-size:22px;margin:0}
+    p.lead{margin:6px 0 18px;color:var(--muted); max-width: 60ch;}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:12px;padding:14px;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+    .grid{display:grid;grid-template-columns:300px 1fr; gap:18px;margin-top:16px}
+    .sound-palette{display:flex;flex-direction:column;gap:10px}
+    .sound{background:rgba(255,255,255,0.03);padding:10px;border-radius:8px;cursor:grab;display:flex;align-items:center;gap:10px}
+    .sound .dot{width:14px;height:14px;border-radius:50%;background:var(--accent)}
+    .pattern-area{display:flex;gap:8px;flex-wrap:wrap}
+    .slot{width:60px;height:60px;border-radius:8px;background:rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center;border:2px dashed rgba(255,255,255,0.04); transition: background-color 0.2s, border-color 0.2s;}
+    .slot.filled{border-style:solid; border-color: var(--accent); background-color: rgba(255, 184, 107, 0.05);}
+    .slot.active {
+      background-color: rgba(255, 184, 107, 0.2);
+      border-color: var(--accent);
+      transform: scale(1.05);
+    }
+    .controls{display:flex;gap:8px;align-items:center;margin-top:12px; flex-wrap: wrap;}
+    button{background:var(--accent);color:#071423;border:none;padding:8px 12px;border-radius:10px;cursor:pointer; font-weight: 600; transition: transform 0.1s, background-color 0.2s;}
+    button:hover { transform: scale(1.03); }
+    button:active { transform: scale(0.98); }
+    button:disabled { background: #555; cursor: not-allowed; }
+    input[type=range]{width:160px; cursor: pointer;}
+    .small{font-size:13px;color:var(--muted)}
+    .footer{margin-top:14px;color:var(--muted);font-size:13px}
+    .tile{display:flex;flex-direction:column;align-items:center;gap:6px}
+    .tile .label{font-size:12px;color:var(--muted)}
+
+    /* Message Box */
+    #message-box {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translate(-50%, -100px);
+      background-color: var(--accent);
+      color: #071423;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      font-weight: 600;
+      transition: transform 0.4s ease-out;
+      z-index: 1000;
+      opacity: 0;
+    }
+    #message-box.show {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+    #message-box.error {
+      background-color: var(--error);
+      color: #fff;
+    }
+
+    @media (max-width:900px){
+      .grid{grid-template-columns:1fr}
+      body { padding-top: 22px; }
+      #message-box { top: 10px; }
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="message-box"></div>
+
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Math Beats — Create Patterns & Play</h1>
+        <p class="lead">Drag sound tiles into the slots to build a beat. Use the tempo slider to change speed and hear the rhythm change!</p>
+      </div>
+      <div class="small">Pattern length: <span id="lenShow">8</span> | Beats per loop</div>
+    </header>
+    
+    <div class="grid">
+      <div class="card">
+        <h3 style="margin-top:0">Sound Palette</h3>
+        <div class="sound-palette" id="palette">
+          <!-- Tiles created by JS -->
+        </div>
+        <div style="margin-top:12px" class="small">Drag a tile into any slot. Click a slot to cycle sounds.</div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3 style="margin:0 0 10px">Build your pattern</h3>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <label class="small">Length</label>
+            <input type="range" id="len" min="4" max="16" value="8">
+            <label class="small">Tempo (BPM)</label>
+            <input type="range" id="tempo" min="60" max="200" value="120">
+            <span class="small"> <strong id="bpm">120</strong> BPM</span>
+          </div>
+
+          <div style="margin-top:12px">
+            <div id="pattern" class="pattern-area" aria-label="pattern slots"></div>
+          </div>
+
+          <div class="controls">
+            <button id="play">Play</button>
+            <button id="stop">Stop</button>
+            <button id="clear">Clear</button>
+            <button id="save" style="background:#7dd3fc">Save Pattern</button>
+            <button id="load" style="background:#c7bfe5">Load Last</button>
+          </div>
+
+          <div class="footer">Tip: Try a 3-step pattern in an 8-beat loop to hear syncopation!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // --- UI Elements ---
+    const palette = document.getElementById('palette');
+    const patternEl = document.getElementById('pattern');
+    const lenInput = document.getElementById('len');
+    const lenShow = document.getElementById('lenShow');
+    const tempo = document.getElementById('tempo');
+    const bpmShow = document.getElementById('bpm');
+    const saveButton = document.getElementById('save');
+    const loadButton = document.getElementById('load');
+    const playButton = document.getElementById('play');
+    const stopButton = document.getElementById('stop');
+    const clearButton = document.getElementById('clear');
+    
+    // --- Message Box ---
+    const messageBox = document.getElementById('message-box');
+    let messageTimer = null;
+
+    function showMessage(text, isError = false) {
+      if (messageTimer) clearTimeout(messageTimer);
+      
+      messageBox.textContent = text;
+      messageBox.className = 'message-box'; // Reset classes
+      if (isError) {
+        messageBox.classList.add('error');
+      }
+      messageBox.classList.add('show');
+
+      messageTimer = setTimeout(() => {
+        messageBox.classList.remove('show');
+      }, 3000);
+    }
+
+    // --- Audio Engine ---
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    const sounds = [
+      {id:'sine', name:'Sine Tone', type:'sine', freq:440},
+      {id:'square', name:'Square Snap', type:'square', freq:330},
+      {id:'triangle', name:'Triangle Tap', type:'triangle', freq:550},
+      {id:'pluck', name:'Pluck', type:'pluck', freq:220},
+      {id:'click', name:'Click', type:'click', freq:1000}
+    ];
+
+    let pattern = []; 
+    let currentTimer = null;
+    let isPlaying = false;
+    let currentStep = 0;
+
+    function scheduleSound(id, time) {
+      const s = sounds.find(x => x.id === id);
+      if (!s) return;
+
+      if (s.type === 'click') {
+        const bufferSize = audioCtx.sampleRate * 0.02; // 20ms
+        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) data[i] = (Math.random() * 2 - 1) * Math.exp(-5 * i / bufferSize);
+        const src = audioCtx.createBufferSource(); src.buffer = buffer;
+        const g = audioCtx.createGain(); g.gain.setValueAtTime(0.7, time); g.gain.exponentialRampToValueAtTime(0.001, time + 0.05);
+        src.connect(g).connect(audioCtx.destination); src.start(time);
+      } else if (s.type === 'pluck') {
+        const osc = audioCtx.createOscillator(); osc.type = 'sawtooth'; osc.frequency.setValueAtTime(s.freq, time);
+        const g = audioCtx.createGain(); g.gain.setValueAtTime(0.001, time);
+        g.gain.linearRampToValueAtTime(0.8, time + 0.01);
+        g.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
+        osc.connect(g).connect(audioCtx.destination); osc.start(time); osc.stop(time + 0.6);
+      } else {
+        const osc = audioCtx.createOscillator(); osc.type = s.type; osc.frequency.setValueAtTime(s.freq, time);
+        const g = audioCtx.createGain(); g.gain.setValueAtTime(0.001, time);
+        g.gain.linearRampToValueAtTime(0.8, time + 0.01);
+        g.gain.exponentialRampToValueAtTime(0.001, time + 0.3);
+        osc.connect(g).connect(audioCtx.destination); osc.start(time); osc.stop(time + 0.35);
+      }
+    }
+
+    function playOne(s) {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const now = audioCtx.currentTime + 0.02; 
+      scheduleSound(s.id, now);
+    }
+    
+    // --- Pattern & UI Logic ---
+
+    function highlightStep(step) {
+      Array.from(patternEl.children).forEach((slot, i) => {
+        if (i === step) {
+          slot.classList.add('active');
+        } else {
+          slot.classList.remove('active');
+        }
+      });
+    }
+
+    function playPattern() {
+      if (isPlaying) return;
+      isPlaying = true;
+      currentStep = 0;
+      
+      const bpm = Number(tempo.value);
+      const interval = 60.0 / bpm; // seconds per beat
+
+      function scheduleNextBeat() {
+        if (!isPlaying) {
+          highlightStep(-1); // Clear highlight on stop
+          return;
+        }
+
+        const beatTime = audioCtx.currentTime + 0.1; // Schedule slightly ahead
+        const soundId = pattern[currentStep];
+        
+        if (soundId) {
+          scheduleSound(soundId, beatTime);
+        }
+        
+        highlightStep(currentStep);
+        
+        currentStep = (currentStep + 1) % pattern.length;
+
+        currentTimer = setTimeout(scheduleNextBeat, interval * 1000);
+      }
+      
+      scheduleNextBeat();
+    }
+
+    function stopPattern() {
+      isPlaying = false;
+      if (currentTimer) clearTimeout(currentTimer);
+      highlightStep(-1); // Clear highlight
+    }
+
+    function buildSlots(n) {
+      stopPattern(); // Stop playback when changing length
+      patternEl.innerHTML = '';
+      
+      // Preserve old pattern data if possible
+      const oldPattern = [...pattern];
+      pattern = new Array(n).fill(null);
+      for(let i = 0; i < Math.min(n, oldPattern.length); i++) {
+        pattern[i] = oldPattern[i];
+      }
+
+      for (let i = 0; i < n; i++) {
+        const slot = document.createElement('div');
+        slot.className = 'slot';
+        slot.dataset.index = i;
+        slot.draggable = true; // Make slots draggable to remove
+        
+        slot.addEventListener('dragover', e => {
+          e.preventDefault();
+          slot.style.backgroundColor = 'rgba(255, 184, 107, 0.1)';
+        });
+        slot.addEventListener('dragleave', e => {
+          slot.style.backgroundColor = '';
+        });
+        slot.addEventListener('drop', e => {
+          e.preventDefault();
+          slot.style.backgroundColor = '';
+          const id = e.dataTransfer.getData('text/plain');
+          setSlot(i, id);
+        });
+        slot.addEventListener('click', () => {
+          const current = pattern[i];
+          const idx = sounds.findIndex(s => s.id === current);
+          const next = sounds[(idx + 1) % sounds.length];
+          setSlot(i, next.id);
+        });
+        slot.addEventListener('dragstart', e => {
+          if (pattern[i]) {
+            e.dataTransfer.setData('text/plain', 'remove:' + i);
+            e.dataTransfer.effectAllowed = 'move';
+          } else {
+            e.preventDefault();
+          }
+        });
+        patternEl.appendChild(slot);
+      }
+      renderSlots();
+    }
+
+    function setSlot(i, id) {
+      if (!id) return;
+      if (id.startsWith('remove:')) {
+        pattern[Number(id.split(':')[1])] = null;
+        renderSlots();
+        return;
+      }
+      const exists = sounds.find(s => s.id === id);
+      if (exists) {
+        pattern[i] = id;
+        renderSlots();
+      }
+    }
+
+    function renderSlots() {
+      Array.from(patternEl.children).forEach((slot, i) => {
+        slot.innerHTML = '';
+        slot.classList.remove('filled');
+        const val = pattern[i];
+        if (val) {
+          const s = sounds.find(x => x.id === val);
+          slot.classList.add('filled');
+          slot.innerHTML = `<div style='text-align:center; pointer-events: none;'><div style='font-weight:600'>${s.name}</div><div class='label'>${s.type}</div></div>`;
+        } else {
+          slot.innerHTML = `<div class='label' style='pointer-events: none;'>drop here</div>`;
+        }
+      });
+    }
+    
+    // --- Palette & Controls ---
+    function initializeAppUI() {
+      // Create palette UI
+      sounds.forEach(s => {
+        const el = document.createElement('div');
+        el.className = 'sound tile';
+        el.draggable = true;
+        el.dataset.id = s.id;
+        el.innerHTML = `<div style="display:flex;align-items:center;gap:10px"><div class='dot'></div><strong>${s.name}</strong></div><div class='label'>${s.type}</div>`;
+        palette.appendChild(el);
+
+        el.addEventListener('dragstart', e => {
+          e.dataTransfer.setData('text/plain', s.id);
+          e.dataTransfer.effectAllowed = 'copy';
+        });
+        el.addEventListener('click', () => playOne(s));
+      });
+      
+      // Allow dragging back to palette to remove
+      palette.addEventListener('dragover', e => e.preventDefault());
+      palette.addEventListener('drop', e => {
+        e.preventDefault();
+        const id = e.dataTransfer.getData('text/plain');
+        if (id.startsWith('remove:')) {
+           setSlot(id); // Will call remove logic
+        }
+      });
+
+      // --- Control Event Listeners ---
+      lenInput.addEventListener('input', () => {
+        const n = Number(lenInput.value);
+        lenShow.textContent = n;
+        buildSlots(n);
+      });
+      tempo.addEventListener('input', () => {
+        bpmShow.textContent = tempo.value;
+      });
+
+      playButton.addEventListener('click', () => {
+        // resume audio ctx on user gesture
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        playPattern();
+      });
+      stopButton.addEventListener('click', () => {
+        stopPattern();
+      });
+      clearButton.addEventListener('click', () => {
+        buildSlots(pattern.length);
+      });
+
+      // Save/Load using localStorage
+      saveButton.addEventListener('click', () => {
+        const dataToSave = {
+          pattern: pattern,
+          tempo: tempo.value,
+          len: pattern.length
+        };
+        try {
+          localStorage.setItem('mathbeats_last', JSON.stringify(dataToSave));
+          showMessage('Pattern saved locally!');
+        } catch (e) {
+          console.error("Error saving to localStorage", e);
+          showMessage('Error saving pattern.', true);
+        }
+      });
+
+      loadButton.addEventListener('click', () => {
+        const data = localStorage.getItem('mathbeats_last');
+        if (!data) {
+          showMessage('No saved pattern found.', true);
+          return;
+        }
+        
+        try {
+          stopPattern();
+          const obj = JSON.parse(data);
+          lenInput.value = obj.len;
+          lenShow.textContent = obj.len;
+          tempo.value = obj.tempo;
+          bpmShow.textContent = obj.tempo;
+          
+          buildSlots(obj.len); // This will create slots
+          
+          // Apply pattern data after slots are built
+          for (let i = 0; i < obj.pattern.length; i++) {
+            pattern[i] = obj.pattern[i] || null;
+          }
+          renderSlots(); // Render the loaded pattern
+          
+          showMessage('Pattern loaded from local storage.');
+        } catch (e) {
+          console.error("Error loading pattern data: ", e, data);
+          showMessage('Error loading pattern. Data might be corrupt.', true);
+        }
+      });
+
+      // init
+      buildSlots(Number(lenInput.value));
+    }
+
+    // --- Initialize the App ---
+    try {
+      initializeAppUI();
+    } catch (e) {
+      console.error("App initialization failed: ", e);
+      showMessage('A critical error occurred. Please refresh.', true);
+    }
+  </script>
+</body>
+</html>
